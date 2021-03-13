@@ -2,11 +2,16 @@ package com.ma.pedidos.command;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ProductCreateCommand {
 
     private String name;
+    @JsonProperty("short_description")
     private String shortDescription;
+    @JsonProperty("long_description")
     private String longDescription;
+    @JsonProperty("unit_price")
     private BigDecimal unitPrice;
     
     public String getName() {

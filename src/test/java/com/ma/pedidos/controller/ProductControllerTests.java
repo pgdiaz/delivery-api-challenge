@@ -1,5 +1,6 @@
 package com.ma.pedidos.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -21,6 +22,7 @@ import com.ma.pedidos.model.ProductModel;
 import com.ma.pedidos.service.ProductService;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -112,8 +114,18 @@ public class ProductControllerTests {
             .andExpect(status().isCreated())
             .andExpect(content().string(expectedContent))
             .andExpect(header().string(HttpHeaders.LOCATION, expectedLocation));
+        
+        ArgumentCaptor<ProductCreateCommand> captor = ArgumentCaptor
+            .forClass(ProductCreateCommand.class);
 
-        verify(service, times(1)).create(any(ProductCreateCommand.class));
+        verify(service, times(1)).create(captor.capture());
+
+        ProductCreateCommand commandCaptured = captor.getValue();
+
+        assertEquals("testProduct", commandCaptured.getName());
+        assertEquals("testShortDescription", commandCaptured.getShortDescription());
+        assertEquals("testLongDescription", commandCaptured.getLongDescription());
+        assertEquals(BigDecimal.TEN, commandCaptured.getUnitPrice());
     }
 
     @Test void updateProductTest() throws Exception {
@@ -130,7 +142,17 @@ public class ProductControllerTests {
         this.mockMvc.perform(request)
             .andExpect(status().isNoContent());
 
-        verify(service, times(1)).update(eq("1-2-3-4"), any(ProductUpdateCommand.class));
+        ArgumentCaptor<ProductUpdateCommand> commandCaptor = ArgumentCaptor
+            .forClass(ProductUpdateCommand.class);
+
+        verify(service, times(1)).update(eq("1-2-3-4"), commandCaptor.capture());
+
+        ProductUpdateCommand commandCaptured = commandCaptor.getValue();
+
+        assertEquals("testProduct", commandCaptured.getName());
+        assertEquals("testShortDescription", commandCaptured.getShortDescription());
+        assertEquals("testLongDescription", commandCaptured.getLongDescription());
+        assertEquals(BigDecimal.TEN, commandCaptured.getUnitPrice());
     }
 
     @Test void removeProductTest() throws Exception {
