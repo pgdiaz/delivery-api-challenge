@@ -1,6 +1,7 @@
 package com.ma.pedidos.controller;
 
 import java.net.URI;
+import java.util.UUID;
 
 import com.ma.pedidos.command.ProductCreateCommand;
 import com.ma.pedidos.command.ProductUpdateCommand;
@@ -29,7 +30,7 @@ public class ProductController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<ProductModel> show(@PathVariable String id) {
+    public ResponseEntity<ProductModel> show(@PathVariable UUID id) {
 
         ProductModel model = this.service.find(id);
 
@@ -51,7 +52,7 @@ public class ProductController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(
-        @PathVariable String id,
+        @PathVariable UUID id,
         @RequestBody ProductUpdateCommand command) {
         
         this.service.update(id, command);
@@ -60,7 +61,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remove(@PathVariable String id) {
+    public ResponseEntity<Void> remove(@PathVariable UUID id) {
 
         this.service.remove(id);
 

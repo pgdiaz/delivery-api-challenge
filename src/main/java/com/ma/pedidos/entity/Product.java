@@ -1,6 +1,7 @@
 package com.ma.pedidos.entity;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,13 +10,15 @@ import javax.persistence.Id;
 @Entity
 public class Product {
     
-    private @Id @GeneratedValue Long id;
+    @Id
+    @GeneratedValue
+    private UUID id;
     private String name;
     private String shortDescription;
     private String longDescription;
     private BigDecimal unitPrice;
     
-    public Long getId() {
+    public UUID getId() {
         return this.id;
     }
     

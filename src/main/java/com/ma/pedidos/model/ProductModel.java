@@ -1,12 +1,13 @@
 package com.ma.pedidos.model;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ProductModel {
     
-    private String id;
+    private UUID id;
     private String name;
     @JsonProperty("short_description")
     private String shortDescription;
@@ -15,11 +16,11 @@ public class ProductModel {
     @JsonProperty("unit_price")
     private BigDecimal unitPrice;
 
-    public String getId() {
+    public UUID getId() {
         return this.id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
     
