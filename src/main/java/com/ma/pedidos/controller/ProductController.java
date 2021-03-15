@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
+@RequestMapping("/products")
 public class ProductController {
 
     private final ProductService service;
@@ -26,7 +28,7 @@ public class ProductController {
         this.service = service;
     }
     
-    @GetMapping("/products/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProductModel> show(@PathVariable String id) {
 
         ProductModel model = this.service.find(id);
@@ -34,7 +36,7 @@ public class ProductController {
         return ResponseEntity.ok(model);
     }
 
-    @PostMapping("/products")
+    @PostMapping()
     public ResponseEntity<ProductModel> create(@RequestBody ProductCreateCommand command) {
 
         ProductModel model = this.service.create(command);
@@ -47,7 +49,7 @@ public class ProductController {
         return ResponseEntity.created(location).body(model);
     }
 
-    @PutMapping("/products/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Void> update(
         @PathVariable String id,
         @RequestBody ProductUpdateCommand command) {
@@ -57,7 +59,7 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> remove(@PathVariable String id) {
 
         this.service.remove(id);

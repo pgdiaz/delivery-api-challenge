@@ -61,6 +61,7 @@ public class ProductControllerTests {
 
         this.mockMvc.perform(get("/products/1-2-3-4"))
             .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(content().string(expectedContent));
         
         verify(service, times(1)).find(eq("1-2-3-4"));
@@ -76,6 +77,7 @@ public class ProductControllerTests {
 
         this.mockMvc.perform(get("/products/4-3-2-1"))
             .andExpect(status().isNotFound())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(content().string(expectedContent));
         
         verify(service, times(1)).find(eq("4-3-2-1"));
@@ -112,6 +114,7 @@ public class ProductControllerTests {
 
         this.mockMvc.perform(request)
             .andExpect(status().isCreated())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(content().string(expectedContent))
             .andExpect(header().string(HttpHeaders.LOCATION, expectedLocation));
         

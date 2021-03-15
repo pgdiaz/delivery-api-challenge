@@ -1,0 +1,24 @@
+{
+    "date": "2020-05-26",
+    "address": "Dorton Road 80",
+    "email": "tsayb@opera.com",
+    "phone": "(0351) 48158101",
+    "time": "21:00",
+    "detail": [
+        {
+            "product": "89efb206-2aa6-4e21-8a23-5765e3de1f31",
+            "name": "Jamón y morrones",
+            "quantity": 2,
+            "amount": 1100.00
+        },
+        {
+            "product": "e29ebd0c-39d2-4054-b0f4-ed2d0ea089a1",
+            "name": "Palmitos",
+            "quantity": 2,
+            "amount": 1200.00
+        }
+    ],
+    "total": 1610.00,
+    "discount": true,
+    "status": "PENDING"
+}
