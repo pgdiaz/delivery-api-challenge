@@ -23,7 +23,7 @@ public class ProductService {
     }
 
     public ProductModel find(UUID id) {
-        Product entity = repository.findById(id)
+        Product entity = this.repository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException(PRODUCT_NOT_FOUND));
 
         return toModel(entity);
@@ -43,14 +43,14 @@ public class ProductService {
             entity.setLongDescription(command.getLongDescription());
         }
 
-        repository.save(entity);
+        this.repository.save(entity);
 
         return toModel(entity);
     }
 
     public void update(UUID id, ProductUpdateCommand command) {
 
-        repository.findById(id)
+        this.repository.findById(id)
             .map(entity -> {
                 if (!isBlankString(command.getName())) {
                     entity.setName(command.getName());
@@ -68,18 +68,18 @@ public class ProductService {
                     entity.setUnitPrice(command.getUnitPrice());
                 }
 
-                return repository.save(entity);
+                return this.repository.save(entity);
             })
             .orElseThrow(() -> new ResourceNotFoundException(PRODUCT_NOT_FOUND));
     }
 
     public void remove(UUID id) {
     
-        if (!repository.existsById(id)) {
+        if (!this.repository.existsById(id)) {
             throw new ResourceNotFoundException(PRODUCT_NOT_FOUND);
         }
 
-        repository.deleteById(id);
+        this.repository.deleteById(id);
     }
 
     private static ProductModel toModel(Product entity) {
