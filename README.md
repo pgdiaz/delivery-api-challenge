@@ -21,6 +21,8 @@ Para realizar eficientemente esta tarea le recomendamos seguir los siguientes pa
 - JDK 8 o superior
 - Maven
 
+Si tiene problemas de persmiso con el wrapper de maven ejecute el comando chmod +x mvnw
+
 ## Enunciado
 Se solicita implementar una API Rest que permita registrar el alta de pedidos de una pizzería.
 
